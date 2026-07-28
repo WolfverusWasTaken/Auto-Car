@@ -22,10 +22,6 @@ class Localizer:
         self.crs_wgs84 = CRS.from_epsg(4326)
         self.crs_utm = CRS.from_epsg(25835)
         self.utm_projection = Proj(self.crs_utm)
-
-        # TODO 2: Create a coordinate transformer using self.crs_wgs84 and self.crs_utm.
-        #         Use Transformer.from_crs(). Then transform the origin point (utm_origin_lat,
-        #         utm_origin_lon) and store results as self.origin_x and self.origin_y.
         self.transformer = Transformer.from_crs(self.crs_wgs84, self.crs_utm, always_xy=True)
         self.origin_x, self.origin_y = self.transformer.transform(utm_origin_lon, utm_origin_lat)
 
@@ -37,27 +33,11 @@ class Localizer:
         self.current_velocity_pub = rospy.Publisher('current_velocity', TwistStamped, queue_size=10)
         self.br = TransformBroadcaster()
 
-        print(f"Localizer initialized with origin: x={self.origin_x:.3f}, y={self.origin_y:.3f}, undulation={self.undulation:.3f}")
-
     def transform_coordinates(self, msg):
-        # TODO 1: Print latitude and longitude from msg to verify data is received.
-        # print(msg.latitude, msg.longitude)
-
-        # TODO 2: Transform msg.latitude and msg.longitude to UTM coordinates using
-        #         self.transformer, then subtract self.origin_x and self.origin_y.
-
         utm_x, utm_y = self.transformer.transform(msg.longitude, msg.latitude)
         x = utm_x - self.origin_x
         y = utm_y - self.origin_y
         z = msg.height - self.undulation
-
-        # print(f"Localizer callback -> x={x:.3f} y={y:.3f}")
-
-        # TODO 3: Calculate orientation as a quaternion.
-        #         - Get azimuth correction: self.utm_projection.get_factors(msg.longitude, msg.latitude).meridian_convergence
-        #         - Subtract correction from msg.azimuth, convert to radians
-        #         - Use convert_azimuth_to_yaw() to get yaw angle
-        #         - Use quaternion_from_euler(0, 0, yaw) to get quaternion, create Quaternion object
 
         azimuth_correction = self.utm_projection.get_factors(
             msg.longitude,
@@ -68,13 +48,6 @@ class Localizer:
         qx, qy, qz, qw = quaternion_from_euler(0, 0, yaw)
         orientation = Quaternion(qx, qy, qz, qw)
 
-
-        # TODO 4: Create and publish a PoseStamped message on self.current_pose_pub:
-        #         - header.stamp from msg.header.stamp, frame_id = "map"
-        #         - position.x, position.y from transformed coordinates
-        #         - position.z = msg.height - self.undulation
-        #         - orientation from the quaternion
-
         current_pose_msg = PoseStamped()
         current_pose_msg.header.stamp = msg.header.stamp
         current_pose_msg.header.frame_id = "map"
@@ -84,14 +57,6 @@ class Localizer:
         current_pose_msg.pose.orientation = orientation
         self.current_pose_pub.publish(current_pose_msg)
 
-
-
-        # TODO 5: Calculate velocity as norm of msg.north_velocity and msg.east_velocity.
-        #         Create and publish a TwistStamped message on self.current_velocity_pub:
-        #         - header.stamp from msg.header.stamp, frame_id = "base_link"
-        #         - twist.linear.x = calculated velocity
-
-
         velocity = math.sqrt(msg.north_velocity ** 2 + msg.east_velocity ** 2)
 
         current_velocity_msg = TwistStamped()
@@ -99,13 +64,6 @@ class Localizer:
         current_velocity_msg.header.frame_id = "base_link"
         current_velocity_msg.twist.linear.x = velocity
         self.current_velocity_pub.publish(current_velocity_msg)
-
-
-        # TODO 6: Create and publish a TransformStamped message using self.br.sendTransform():
-        #         - header.stamp from msg.header.stamp, frame_id = "map"
-        #         - child_frame_id = "base_link"
-        #         - transform.translation from position (x, y, z)
-        #         - transform.rotation from orientation quaternion
 
         t = TransformStamped()
         t.header.stamp = msg.header.stamp
@@ -116,7 +74,6 @@ class Localizer:
         t.transform.translation.z = z
         t.transform.rotation = orientation
         self.br.sendTransform(t)
-
 
     @staticmethod
     def convert_azimuth_to_yaw(azimuth):
