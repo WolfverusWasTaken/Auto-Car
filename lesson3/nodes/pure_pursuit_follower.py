@@ -82,7 +82,6 @@ class PurePursuitFollower:
                 lookahead_point.x - msg.pose.position.x
             )
             alpha = lookahead_heading - heading
-            alpha = np.arctan2(np.sin(alpha), np.cos(alpha))
             ld = distance(current_pose, lookahead_point)
 
             if ld > 0:
