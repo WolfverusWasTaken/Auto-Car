@@ -96,23 +96,73 @@ class GlobalPlanner:
 
     def convert_laneletseq_to_waypoints_list(self, laneletseq):
         waypoints = []
+        previous_point = None
 
         for j, lanelet in enumerate(laneletseq):
             speed_ref = lanelet.attributes['speed_ref'] if 'speed_ref' in lanelet.attributes else self.speed_limit
             speed = min(float(speed_ref), self.speed_limit) / 3.6
+            target_spacing = max(0.5, min(2.0, speed * 0.5))
 
             for i, point in enumerate(lanelet.centerline):
                 if i == 0 and j != 0:
                     continue
 
-                waypoint = Waypoint()
-                waypoint.position.x = point.x
-                waypoint.position.y = point.y
-                waypoint.position.z = point.z
-                waypoint.speed = speed
-                waypoints.append(waypoint)
+                if previous_point is None:
+                    waypoints.append(self.create_waypoint(point.x, point.y, point.z, speed))
+                    previous_point = point
+                    continue
 
-        if not waypoints:
+                distance = np.hypot(point.x - previous_point.x, point.y - previous_point.y)
+                steps = max(1, int(np.ceil(distance / target_spacing)))
+
+                for step in range(1, steps + 1):
+                    ratio = step / steps
+                    x = previous_point.x + ratio * (point.x - previous_point.x)
+                    y = previous_point.y + ratio * (point.y - previous_point.y)
+                    z = previous_point.z + ratio * (point.z - previous_point.z)
+                    waypoints.append(self.create_waypoint(x, y, z, speed))
+
+                previous_point = point
+
+        if not wadx = min(
+            range(len(waypoints)),
+            key=lambda i: np.hypot(
+                waypoints[i].position.x - self.goal_point.x,
+                waypoints[i].position.y - self.goal_point.y
+            )
+        )
+
+        waypoints = waypoints[:closest_idx + 1]
+        waypoints[-1].position.x = self.goal_point.x
+        waypoints[-1].position.y = self.goal_point.y
+        self.apply_endpoint_speed_ease_out(waypoints)
+
+        return waypoints
+
+    def create_waypoint(self, x, y, z, speed):
+        waypoint = Waypoint()
+        waypoint.position.x = x
+        waypoint.position.y = y
+        waypoint.position.z = z
+        waypoint.speed = speed
+        return waypoint
+
+    def apply_endpoint_speed_ease_out(self, waypoints):
+        path_xy = np.array([(wp.position.x, wp.position.y) for wp in waypoints])
+        segment_lengths = np.sqrt(np.sum(np.diff(path_xy, axis=0)**2, axis=1))
+        distances_from_start = np.insert(np.cumsum(segment_lengths), 0, 0)
+        distances_to_endpoint = distances_from_start[-1] - distances_from_start
+        speed_limits = np.sqrt(2 * self.default_deceleration * distances_to_endpoint)
+
+        for waypoint, speed_limit in zip(waypoints, speed_limits):
+            waypoint.speed = min(waypoint.speed, speed_limit)
+
+    def publish_lane_from_waypoints_list(self, waypoints):
+        lane = Path()
+        lane.header.frame_id = self.output_frame
+        lane.header.stamp = rospy.Time.now()
+        lane.waypoints = waypoints
+        self.global_path_pub.publish(lane)ypoints:
             return waypoints
 
         closest_idx = min(
@@ -129,6 +179,14 @@ class GlobalPlanner:
         self.apply_endpoint_speed_ease_out(waypoints)
 
         return waypoints
+
+    def create_waypoint(self, x, y, z, speed):
+        waypoint = Waypoint()
+        waypoint.position.x = x
+        waypoint.position.y = y
+        waypoint.position.z = z
+        waypoint.speed = speed
+        return waypoint
 
     def apply_endpoint_speed_ease_out(self, waypoints):
         path_xy = np.array([(wp.position.x, wp.position.y) for wp in waypoints])
