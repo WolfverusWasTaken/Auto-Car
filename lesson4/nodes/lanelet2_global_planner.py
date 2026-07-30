@@ -29,6 +29,7 @@ class GlobalPlanner:
 
         self.output_frame = rospy.get_param("lanelet2_global_planner/output_frame")
         self.distance_to_goal_limit = rospy.get_param("lanelet2_global_planner/distance_to_goal_limit")
+        self.default_deceleration = rospy.get_param("default_deceleration")
 
         # Load Lanelet2 map
         if coordinate_transformer == "utm":
@@ -125,8 +126,19 @@ class GlobalPlanner:
         waypoints = waypoints[:closest_idx + 1]
         waypoints[-1].position.x = self.goal_point.x
         waypoints[-1].position.y = self.goal_point.y
+        self.apply_endpoint_speed_ease_out(waypoints)
 
         return waypoints
+
+    def apply_endpoint_speed_ease_out(self, waypoints):
+        path_xy = np.array([(wp.position.x, wp.position.y) for wp in waypoints])
+        segment_lengths = np.sqrt(np.sum(np.diff(path_xy, axis=0)**2, axis=1))
+        distances_from_start = np.insert(np.cumsum(segment_lengths), 0, 0)
+        distances_to_endpoint = distances_from_start[-1] - distances_from_start
+        speed_limits = np.sqrt(2 * self.default_deceleration * distances_to_endpoint)
+
+        for waypoint, speed_limit in zip(waypoints, speed_limits):
+            waypoint.speed = min(waypoint.speed, speed_limit)
 
     def publish_lane_from_waypoints_list(self, waypoints):
         lane = Path()
