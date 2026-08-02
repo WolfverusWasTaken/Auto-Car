@@ -58,10 +58,12 @@ class GlobalPlanner:
         with self.lock:
             self.goal_point = BasicPoint2d(msg.pose.position.x, msg.pose.position.y)
 
+        rospy.loginfo("%s - goal position (%f, %f, %f) in %s frame", rospy.get_name(),
+                      msg.pose.position.x, msg.pose.position.y, msg.pose.position.z,
+                      msg.header.frame_id)
+
         if self.current_location is None:
             return
-
-        rospy.loginfo("%s - goal position: x=%f, y=%f", rospy.get_name(), msg.pose.position.x, msg.pose.position.y)
 
         start_lanelet = findNearest(self.lanelet2_map.laneletLayer, self.current_location, 1)[0][1]
         goal_lanelet = findNearest(self.lanelet2_map.laneletLayer, self.goal_point, 1)[0][1]
@@ -124,45 +126,7 @@ class GlobalPlanner:
 
                 previous_point = point
 
-        if not wadx = min(
-            range(len(waypoints)),
-            key=lambda i: np.hypot(
-                waypoints[i].position.x - self.goal_point.x,
-                waypoints[i].position.y - self.goal_point.y
-            )
-        )
-
-        waypoints = waypoints[:closest_idx + 1]
-        waypoints[-1].position.x = self.goal_point.x
-        waypoints[-1].position.y = self.goal_point.y
-        self.apply_endpoint_speed_ease_out(waypoints)
-
-        return waypoints
-
-    def create_waypoint(self, x, y, z, speed):
-        waypoint = Waypoint()
-        waypoint.position.x = x
-        waypoint.position.y = y
-        waypoint.position.z = z
-        waypoint.speed = speed
-        return waypoint
-
-    def apply_endpoint_speed_ease_out(self, waypoints):
-        path_xy = np.array([(wp.position.x, wp.position.y) for wp in waypoints])
-        segment_lengths = np.sqrt(np.sum(np.diff(path_xy, axis=0)**2, axis=1))
-        distances_from_start = np.insert(np.cumsum(segment_lengths), 0, 0)
-        distances_to_endpoint = distances_from_start[-1] - distances_from_start
-        speed_limits = np.sqrt(2 * self.default_deceleration * distances_to_endpoint)
-
-        for waypoint, speed_limit in zip(waypoints, speed_limits):
-            waypoint.speed = min(waypoint.speed, speed_limit)
-
-    def publish_lane_from_waypoints_list(self, waypoints):
-        lane = Path()
-        lane.header.frame_id = self.output_frame
-        lane.header.stamp = rospy.Time.now()
-        lane.waypoints = waypoints
-        self.global_path_pub.publish(lane)ypoints:
+        if not waypoints:
             return waypoints
 
         closest_idx = min(
