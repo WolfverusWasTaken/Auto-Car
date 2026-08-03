@@ -138,8 +138,7 @@ class GlobalPlanner:
         )
 
         waypoints = waypoints[:closest_idx + 1]
-        waypoints[-1].position.x = self.goal_point.x
-        waypoints[-1].position.y = self.goal_point.y
+        self.goal_point = BasicPoint2d(waypoints[-1].position.x, waypoints[-1].position.y)
         self.apply_endpoint_speed_ease_out(waypoints)
 
         return waypoints
