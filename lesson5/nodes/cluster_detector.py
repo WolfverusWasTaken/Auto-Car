@@ -41,9 +41,6 @@ class ClusterDetector:
             return
 
         points = structured_to_unstructured(data[['x', 'y', 'z', 'label']], dtype=np.float32)
-        if len(points) == 0:
-            return
-
         if msg.header.frame_id != self.output_frame:
             try:
                 transform = self.tf_buffer.lookup_transform(self.output_frame, msg.header.frame_id, msg.header.stamp,
