@@ -9,16 +9,15 @@ from ros_numpy import msgify
 from autoware_mini.msg import Path, DetectedObjectArray
 from sensor_msgs.msg import PointCloud2
 
-# Collision point categories: 0 = none, 1 = goal, 2 = traffic light, 3 = static obstacle, 4 = moving obstacle
 DTYPE = np.dtype([
-    ('x', np.float32),          # position
+    ('x', np.float32),
     ('y', np.float32),
     ('z', np.float32),
-    ('vx', np.float32),         # velocity
+    ('vx', np.float32),
     ('vy', np.float32),
     ('vz', np.float32),
-    ('distance_to_stop', np.float32),   # safety distance before collision point
-    ('deceleration_limit', np.float32), # max allowed deceleration (np.inf = no limit)
+    ('distance_to_stop', np.float32),
+    ('deceleration_limit', np.float32),
     ('category', np.int32)
 ])
 
@@ -27,30 +26,21 @@ class SimpleCollisionChecker:
 
     def __init__(self):
 
-        # Parameters
         self.safety_box_width = rospy.get_param("safety_box_width")
         self.stopped_speed_limit = rospy.get_param("stopped_speed_limit")
         self.braking_safety_distance_obstacle = rospy.get_param("~braking_safety_distance_obstacle")
         self.braking_safety_distance_goal = rospy.get_param("~braking_safety_distance_goal")
-        # TODO 8 (lesson 7): add braking_safety_distance_stopline parameter,
-        #                    load the lanelet2 map and extract the stop lines with traffic lights
 
-        # Variables
         self.detected_objects = None
         self.goal_point = None
-        # TODO 8 (lesson 7): add stopline_statuses dict
 
-        # Lock for thread safety
         self.lock = threading.Lock()
 
-        # Publishers
         self.collision_points_pub = rospy.Publisher('collision_points', PointCloud2, queue_size=1, tcp_nodelay=True)
 
-        # Subscribers
         rospy.Subscriber('extracted_local_path', Path, self.path_callback, queue_size=1, tcp_nodelay=True)
         rospy.Subscriber('/detection/final_objects', DetectedObjectArray, self.detected_objects_callback, queue_size=1, buff_size=2**20, tcp_nodelay=True)
         rospy.Subscriber('global_path', Path, self.global_path_callback, queue_size=None, tcp_nodelay=True)
-        # TODO 8 (lesson 7): add traffic_light_status subscriber
 
         rospy.loginfo("%s - initialized", rospy.get_name())
 
@@ -75,13 +65,6 @@ class SimpleCollisionChecker:
             collision_points_msg.header = msg.header
             self.collision_points_pub.publish(collision_points_msg)
             return
-
-        # TODO 1: Create obstacle collision points.
-        #         - Create a Shapely LineString from the local path waypoints
-        #         - Buffer it with safety_box_width / 2 (cap_style="flat")
-        #         - If detected_objects is not None and not empty, iterate over them
-        #           and add collision points from their intersections with the buffered path
-        #           to the collision_points array
 
         local_path_xyz = np.array([(wp.position.x, wp.position.y, wp.position.z) for wp in msg.waypoints])
         local_path_linestring = shapely.LineString(local_path_xyz)
@@ -117,11 +100,6 @@ class SimpleCollisionChecker:
                                 category
                             )], dtype=DTYPE))
 
-        # TODO 7: Add goal point as collision point.
-        #         - Check if goal_point is within the buffered local path
-        #         - If so, append it as a collision point with category=1, zero velocity,
-        #           distance_to_stop=braking_safety_distance_goal
-
         if goal_point is not None:
             goal_point_shapely = shapely.Point(goal_point.x, goal_point.y)
 
@@ -139,9 +117,6 @@ class SimpleCollisionChecker:
                         1
                     )], dtype=DTYPE))
 
-        # TODO 9 (lesson 7): add stop line collision points for red traffic lights
-
-        # Publish the collision points (an empty array means no collision points on the path)
         if len(collision_points) > 0:
             collision_points_msg = msgify(PointCloud2, collision_points)
         else:
