@@ -109,6 +109,14 @@ class SimpleSpeedPlanner:
             stopping_point_distance = collision_point_distances[target_idx] - collision_points["distance_to_stop"][target_idx]
             collision_point_category = collision_points[target_idx]["category"]
 
+            swerve_marker_linestring = None
+            swerve_marker_start_distance = 0.0
+            swerve_marker_end_distance = 0.0
+            target_distance_object = target_distances[target_idx]
+            approaching_speed = min(target_object_speed, 0.0)
+            zero_speeds_onwards = False
+            swerve_plan = None
+
             if toggle_swerve and collision_point_category in (3, 4):
                 swerve_plan = make_swerve_plan(
                     local_path_msg,
@@ -120,54 +128,41 @@ class SimpleSpeedPlanner:
                     self.distance_to_car_front
                 )
 
-                if swerve_plan is not None:
-                    for wp in local_path_msg.waypoints:
-                        wp.speed = min(wp.speed, SWERVE_SPEED_LIMIT)
+            if swerve_plan is not None:
+                target_object_distance = swerve_plan.return_distance - self.distance_to_car_front
+                target_object_speed = 0.0
+                stopping_point_distance = swerve_plan.return_distance
+                swerve_marker_linestring = local_path_linestring
+                swerve_marker_start_distance = swerve_plan.start_distance
+                swerve_marker_end_distance = swerve_plan.return_distance
 
-                    path = Path()
-                    path.header = local_path_msg.header
-                    path.waypoints = local_path_msg.waypoints
+                for wp in local_path_msg.waypoints:
+                    wp.speed = min(wp.speed, SWERVE_SPEED_LIMIT)
+            else:
+                for i, wp in enumerate(local_path_msg.waypoints):
+                    if zero_speeds_onwards:
+                        wp.speed = 0.0
+                        continue
 
-                    self.publish_local_path(path,
-                                            target_object_distance=swerve_plan.return_distance - self.distance_to_car_front,
-                                            target_object_speed=0.0,
-                                            stopping_point_distance=swerve_plan.return_distance,
-                                            collision_point_category=collision_point_category,
-                                            is_blocked=True)
-                    self.publish_swerve_point_markers(local_path_msg.header,
-                                                      local_path_linestring,
-                                                      swerve_plan.start_distance,
-                                                      swerve_plan.return_distance)
-                    return
+                    if i > 0:
+                        previous_wp = local_path_msg.waypoints[i - 1]
+                        target_distance_object -= math.sqrt(
+                            (wp.position.x - previous_wp.position.x) ** 2 +
+                            (wp.position.y - previous_wp.position.y) ** 2
+                        )
 
-            zero_speeds_onwards = False
-            target_distance_object = target_distances[target_idx]
-            approaching_speed = min(target_object_speed, 0.0)
-
-            for i, wp in enumerate(local_path_msg.waypoints):
-                if zero_speeds_onwards:
-                    wp.speed = 0.0
-                    continue
-
-                if i > 0:
-                    previous_wp = local_path_msg.waypoints[i - 1]
-                    target_distance_object -= math.sqrt(
-                        (wp.position.x - previous_wp.position.x) ** 2 +
-                        (wp.position.y - previous_wp.position.y) ** 2
+                    target_speed_object = max(
+                        0.0,
+                        approaching_speed + math.sqrt(max(
+                            0.0,
+                            target_object_speed ** 2 + 2 * self.default_deceleration * target_distance_object
+                        ))
                     )
 
-                target_speed_object = max(
-                    0.0,
-                    approaching_speed + math.sqrt(max(
-                        0.0,
-                        target_object_speed ** 2 + 2 * self.default_deceleration * target_distance_object
-                    ))
-                )
+                    wp.speed = min(target_speed_object, wp.speed)
 
-                wp.speed = min(target_speed_object, wp.speed)
-
-                if math.isclose(wp.speed, 0.0):
-                    zero_speeds_onwards = True
+                    if math.isclose(wp.speed, 0.0):
+                        zero_speeds_onwards = True
 
             path = Path()
             path.header = local_path_msg.header
@@ -179,7 +174,10 @@ class SimpleSpeedPlanner:
                                     stopping_point_distance=stopping_point_distance,
                                     collision_point_category=collision_point_category,
                                     is_blocked=True)
-            self.publish_swerve_point_markers(local_path_msg.header)
+            self.publish_swerve_point_markers(local_path_msg.header,
+                                              swerve_marker_linestring,
+                                              swerve_marker_start_distance,
+                                              swerve_marker_end_distance)
 
         except Exception as e:
             rospy.logerr_throttle(10, "%s - Exception in callback: %s", rospy.get_name(), traceback.format_exc())
