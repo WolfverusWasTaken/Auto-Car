@@ -77,6 +77,8 @@ class SimpleSpeedPlanner:
             # Project collision points onto the local path to get distances
             collision_points_shapely = shapely.points(structured_to_unstructured(collision_points[['x', 'y', 'z']]))
             collision_point_distances = np.array([local_path_linestring.project(cp) for cp in collision_points_shapely])
+            ego_distance_from_local_path_start = local_path_linestring.project(current_position)
+            collision_point_distances_from_ego = collision_point_distances - ego_distance_from_local_path_start
 
             # TODO 2: Calculate target velocity and modify the local path waypoint speeds.
             #         - Calculate target velocity for each collision point using:
@@ -85,14 +87,14 @@ class SimpleSpeedPlanner:
             #         - Overwrite waypoint speeds: wp.speed = min(target_velocity, wp.speed)
 
             calculated_target_velocities = np.sqrt(
-                np.maximum(0, 2 * self.default_deceleration * collision_point_distances)
+                np.maximum(0, 2 * self.default_deceleration * collision_point_distances_from_ego)
             )
             target_idx = np.argmin(calculated_target_velocities)
 
             target_velocity = calculated_target_velocities[target_idx]
-            target_object_distance = collision_point_distances[target_idx]
+            target_object_distance = collision_point_distances_from_ego[target_idx]
             target_object_speed = 0
-            stopping_point_distance = target_object_distance
+            stopping_point_distance = collision_point_distances[target_idx]
             collision_point_category = collision_points[target_idx]["category"]
 
             # TODO 3: Add braking safety distance.
@@ -100,16 +102,20 @@ class SimpleSpeedPlanner:
             #         - Subtract distance_to_stop (from collision points) from distances
             #         - Update target_object_distance and stopping_point_distance accordingly
 
-            collision_point_braking_distances = self.distance_to_car_front + collision_points["distance_to_stop"]
-            target_distances = collision_point_distances - collision_point_braking_distances
+            collision_point_braking_distances = collision_points["distance_to_stop"]
+            target_distances = (
+                collision_point_distances_from_ego
+                - self.distance_to_car_front
+                - collision_point_braking_distances
+            )
             calculated_target_velocities = np.sqrt(
                 np.maximum(0, 2 * self.default_deceleration * target_distances)
             )
             target_idx = np.argmin(calculated_target_velocities)
 
             target_velocity = calculated_target_velocities[target_idx]
-            target_object_distance = collision_point_distances[target_idx] - self.distance_to_car_front
-            stopping_point_distance = collision_point_distances[target_idx] - collision_point_braking_distances[target_idx]
+            target_object_distance = collision_point_distances_from_ego[target_idx] - self.distance_to_car_front
+            stopping_point_distance = collision_point_distances[target_idx] - collision_points["distance_to_stop"][target_idx]
             collision_point_category = collision_points[target_idx]["category"]
 
             # TODO 4: Calculate collision point speed.
@@ -154,9 +160,9 @@ class SimpleSpeedPlanner:
             target_idx = np.argmin(calculated_target_velocities)
 
             target_velocity = calculated_target_velocities[target_idx]
-            target_object_distance = collision_point_distances[target_idx] - self.distance_to_car_front
+            target_object_distance = collision_point_distances_from_ego[target_idx] - self.distance_to_car_front
             target_object_speed = collision_point_speeds[target_idx]
-            stopping_point_distance = collision_point_distances[target_idx] - collision_point_braking_distances[target_idx]
+            stopping_point_distance = collision_point_distances[target_idx] - collision_points["distance_to_stop"][target_idx]
             collision_point_category = collision_points[target_idx]["category"]
 
             # Publishing the modified local path goes below all the TODOs.
@@ -164,8 +170,34 @@ class SimpleSpeedPlanner:
             # self.publish_local_path() together with the calculated metadata;
             # the later TODOs only refine these values.
 
-            for wp in local_path_msg.waypoints:
-                wp.speed = min(target_velocity, wp.speed)
+            zero_speeds_onwards = False
+            target_distance_object = target_distances[target_idx] + ego_distance_from_local_path_start
+            approaching_speed = min(target_object_speed, 0.0)
+
+            for i, wp in enumerate(local_path_msg.waypoints):
+                if zero_speeds_onwards:
+                    wp.speed = 0.0
+                    continue
+
+                if i > 0:
+                    previous_wp = local_path_msg.waypoints[i - 1]
+                    target_distance_object -= math.sqrt(
+                        (wp.position.x - previous_wp.position.x) ** 2 +
+                        (wp.position.y - previous_wp.position.y) ** 2
+                    )
+
+                target_speed_object = max(
+                    0.0,
+                    approaching_speed + math.sqrt(max(
+                        0.0,
+                        target_object_speed ** 2 + 2 * self.default_deceleration * target_distance_object
+                    ))
+                )
+
+                wp.speed = min(target_speed_object, wp.speed)
+
+                if math.isclose(wp.speed, 0.0):
+                    zero_speeds_onwards = True
 
             path = Path()
             path.header = local_path_msg.header
