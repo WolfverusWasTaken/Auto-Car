@@ -12,6 +12,11 @@ from ros_numpy import numpify
 from autoware_mini.msg import Path, LocalPath
 from sensor_msgs.msg import PointCloud2
 from geometry_msgs.msg import PoseStamped, TwistStamped, Vector3
+from std_msgs.msg import ColorRGBA
+from visualization_msgs.msg import MarkerArray, Marker
+from simple_swerve_helper import SWERVE_SPEED_LIMIT, make_swerve_plan
+
+toggle_swerve = False
 
 
 class SimpleSpeedPlanner:
@@ -31,6 +36,7 @@ class SimpleSpeedPlanner:
 
         self.local_path_pub = rospy.Publisher('local_path', Path, queue_size=1, tcp_nodelay=True)
         self.visualized_path_pub = rospy.Publisher('visualized_path', LocalPath, queue_size=1, tcp_nodelay=True)
+        self.swerve_point_markers_pub = rospy.Publisher('swerve_point_markers', MarkerArray, queue_size=1, tcp_nodelay=True)
 
         rospy.Subscriber('/localization/current_pose', PoseStamped, self.current_pose_callback, queue_size=1, tcp_nodelay=True)
         rospy.Subscriber('/localization/current_velocity', TwistStamped, self.current_velocity_callback, queue_size=1, tcp_nodelay=True)
@@ -62,6 +68,7 @@ class SimpleSpeedPlanner:
 
             if len(local_path_msg.waypoints) == 0 or len(collision_points) == 0:
                 self.publish_local_path(local_path_msg)
+                self.publish_swerve_point_markers(local_path_msg.header)
                 return
 
             local_path_xyz = np.array([(wp.position.x, wp.position.y, wp.position.z) for wp in local_path_msg.waypoints])
@@ -130,6 +137,37 @@ class SimpleSpeedPlanner:
             stopping_point_distance = collision_point_distances[target_idx] - collision_points["distance_to_stop"][target_idx]
             collision_point_category = collision_points[target_idx]["category"]
 
+            if toggle_swerve and collision_point_category in (3, 4):
+                swerve_plan = make_swerve_plan(
+                    local_path_msg,
+                    local_path_linestring,
+                    collision_points,
+                    collision_point_distances,
+                    target_idx,
+                    ego_distance_from_local_path_start,
+                    self.distance_to_car_front
+                )
+
+                if swerve_plan is not None:
+                    for wp in local_path_msg.waypoints:
+                        wp.speed = min(wp.speed, SWERVE_SPEED_LIMIT)
+
+                    path = Path()
+                    path.header = local_path_msg.header
+                    path.waypoints = local_path_msg.waypoints
+
+                    self.publish_local_path(path,
+                                            target_object_distance=swerve_plan.return_distance - ego_distance_from_local_path_start - self.distance_to_car_front,
+                                            target_object_speed=0.0,
+                                            stopping_point_distance=swerve_plan.return_distance,
+                                            collision_point_category=collision_point_category,
+                                            is_blocked=True)
+                    self.publish_swerve_point_markers(local_path_msg.header,
+                                                      local_path_linestring,
+                                                      swerve_plan.start_distance,
+                                                      swerve_plan.return_distance)
+                    return
+
             zero_speeds_onwards = False
             target_distance_object = target_distances[target_idx] + ego_distance_from_local_path_start
             approaching_speed = min(target_object_speed, 0.0)
@@ -169,6 +207,7 @@ class SimpleSpeedPlanner:
                                     stopping_point_distance=stopping_point_distance,
                                     collision_point_category=collision_point_category,
                                     is_blocked=True)
+            self.publish_swerve_point_markers(local_path_msg.header)
 
         except Exception as e:
             rospy.logerr_throttle(10, "%s - Exception in callback: %s", rospy.get_name(), traceback.format_exc())
@@ -182,6 +221,42 @@ class SimpleSpeedPlanner:
                                                    stopping_point_distance=float(stopping_point_distance),
                                                    collision_point_category=int(collision_point_category),
                                                    is_blocked=bool(is_blocked)))
+
+    def publish_swerve_point_markers(self, header, linestring=None, start_distance=0.0, end_distance=0.0):
+        marker_array = MarkerArray()
+
+        if linestring is None:
+            marker = Marker(header=header)
+            marker.action = Marker.DELETEALL
+            marker_array.markers.append(marker)
+            self.swerve_point_markers_pub.publish(marker_array)
+            return
+
+        marker_array.markers.append(self.make_swerve_line_marker(header, linestring, start_distance, 0,
+                                                                 ColorRGBA(1.0, 0.0, 0.0, 0.7)))
+        marker_array.markers.append(self.make_swerve_line_marker(header, linestring, end_distance, 1,
+                                                                 ColorRGBA(0.0, 1.0, 0.0, 0.7)))
+        self.swerve_point_markers_pub.publish(marker_array)
+
+    def make_swerve_line_marker(self, header, linestring, distance, marker_id, color):
+        point = linestring.interpolate(distance)
+        heading = self.get_heading_at_distance(linestring, distance)
+        marker = Marker(header=header)
+        marker.ns = "Swerve points"
+        marker.id = marker_id
+        marker.type = Marker.CUBE
+        marker.action = Marker.ADD
+        marker.pose.position.x = point.x
+        marker.pose.position.y = point.y
+        marker.pose.position.z = point.z + 1.0
+        marker.pose.orientation.z = math.sin(heading / 2.0)
+        marker.pose.orientation.w = math.cos(heading / 2.0)
+        marker.scale.x = 0.3
+        marker.scale.y = 5.0
+        marker.scale.z = 2.5
+        marker.color = color
+        marker.lifetime = rospy.Duration(0.3)
+        return marker
 
     @staticmethod
     def get_heading_at_distance(linestring, distance):

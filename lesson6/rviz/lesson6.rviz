@@ -866,6 +866,14 @@ Visualization Manager:
           Queue Size: 100
           Value: true
         - Class: rviz/MarkerArray
+          Enabled: true
+          Marker Topic: /planning/swerve_point_markers
+          Name: Swerve points
+          Namespaces:
+            {}
+          Queue Size: 100
+          Value: true
+        - Class: rviz/MarkerArray
           Enabled: false
           Marker Topic: /planning/target_lane_markers
           Name: Start and Goal lanelet markers
