@@ -11,7 +11,7 @@ from numpy.lib.recfunctions import structured_to_unstructured
 from ros_numpy import numpify
 from autoware_mini.msg import Path, LocalPath
 from sensor_msgs.msg import PointCloud2
-from geometry_msgs.msg import PoseStamped, TwistStamped, Vector3
+from geometry_msgs.msg import TwistStamped, Vector3
 from std_msgs.msg import ColorRGBA
 from visualization_msgs.msg import MarkerArray, Marker
 from simple_swerve_helper import SWERVE_SPEED_LIMIT, make_swerve_plan
@@ -29,7 +29,6 @@ class SimpleSpeedPlanner:
         synchronization_slop = rospy.get_param("~synchronization_slop")
         self.distance_to_car_front = rospy.get_param("distance_to_car_front")
 
-        self.current_position = None
         self.current_speed = None
 
         self.lock = threading.Lock()
@@ -38,7 +37,6 @@ class SimpleSpeedPlanner:
         self.visualized_path_pub = rospy.Publisher('visualized_path', LocalPath, queue_size=1, tcp_nodelay=True)
         self.swerve_point_markers_pub = rospy.Publisher('swerve_point_markers', MarkerArray, queue_size=1, tcp_nodelay=True)
 
-        rospy.Subscriber('/localization/current_pose', PoseStamped, self.current_pose_callback, queue_size=1, tcp_nodelay=True)
         rospy.Subscriber('/localization/current_velocity', TwistStamped, self.current_velocity_callback, queue_size=1, tcp_nodelay=True)
 
         collision_points_sub = message_filters.Subscriber('collision_points', PointCloud2, tcp_nodelay=True)
@@ -52,18 +50,14 @@ class SimpleSpeedPlanner:
     def current_velocity_callback(self, msg):
         self.current_speed = msg.twist.linear.x
 
-    def current_pose_callback(self, msg):
-        self.current_position = shapely.Point(msg.pose.position.x, msg.pose.position.y, msg.pose.position.z)
-
     def collision_points_and_path_callback(self, collision_points_msg, local_path_msg):
         try:
             with self.lock:
                 collision_points = numpify(collision_points_msg) if len(collision_points_msg.data) > 0 else np.array([])
-                current_position = self.current_position
                 current_speed = self.current_speed
 
-            if current_speed is None or current_position is None:
-                rospy.logwarn_throttle(3, "%s - current speed or position not received!", rospy.get_name())
+            if current_speed is None:
+                rospy.logwarn_throttle(3, "%s - current speed not received!", rospy.get_name())
                 return
 
             if len(local_path_msg.waypoints) == 0 or len(collision_points) == 0:
@@ -76,19 +70,7 @@ class SimpleSpeedPlanner:
 
             collision_points_shapely = shapely.points(structured_to_unstructured(collision_points[['x', 'y', 'z']]))
             collision_point_distances = np.array([local_path_linestring.project(cp) for cp in collision_points_shapely])
-            ego_distance_from_local_path_start = local_path_linestring.project(current_position)
-            collision_point_distances_from_ego = collision_point_distances - ego_distance_from_local_path_start
-
-            calculated_target_velocities = np.sqrt(
-                np.maximum(0, 2 * self.default_deceleration * collision_point_distances_from_ego)
-            )
-            target_idx = np.argmin(calculated_target_velocities)
-
-            target_velocity = calculated_target_velocities[target_idx]
-            target_object_distance = collision_point_distances_from_ego[target_idx]
-            target_object_speed = 0
-            stopping_point_distance = collision_point_distances[target_idx]
-            collision_point_category = collision_points[target_idx]["category"]
+            collision_point_distances_from_ego = collision_point_distances
 
             collision_point_braking_distances = collision_points["distance_to_stop"]
             target_distances = (
@@ -96,15 +78,6 @@ class SimpleSpeedPlanner:
                 - self.distance_to_car_front
                 - collision_point_braking_distances
             )
-            calculated_target_velocities = np.sqrt(
-                np.maximum(0, 2 * self.default_deceleration * target_distances)
-            )
-            target_idx = np.argmin(calculated_target_velocities)
-
-            target_velocity = calculated_target_velocities[target_idx]
-            target_object_distance = collision_point_distances_from_ego[target_idx] - self.distance_to_car_front
-            stopping_point_distance = collision_point_distances[target_idx] - collision_points["distance_to_stop"][target_idx]
-            collision_point_category = collision_points[target_idx]["category"]
 
             collision_point_path_headings = [
                 self.get_heading_at_distance(local_path_linestring, d)
@@ -131,7 +104,6 @@ class SimpleSpeedPlanner:
 
             target_idx = np.argmin(calculated_target_velocities)
 
-            target_velocity = calculated_target_velocities[target_idx]
             target_object_distance = collision_point_distances_from_ego[target_idx] - self.distance_to_car_front
             target_object_speed = collision_point_speeds[target_idx]
             stopping_point_distance = collision_point_distances[target_idx] - collision_points["distance_to_stop"][target_idx]
@@ -144,7 +116,7 @@ class SimpleSpeedPlanner:
                     collision_points,
                     collision_point_distances,
                     target_idx,
-                    ego_distance_from_local_path_start,
+                    0.0,
                     self.distance_to_car_front
                 )
 
@@ -157,7 +129,7 @@ class SimpleSpeedPlanner:
                     path.waypoints = local_path_msg.waypoints
 
                     self.publish_local_path(path,
-                                            target_object_distance=swerve_plan.return_distance - ego_distance_from_local_path_start - self.distance_to_car_front,
+                                            target_object_distance=swerve_plan.return_distance - self.distance_to_car_front,
                                             target_object_speed=0.0,
                                             stopping_point_distance=swerve_plan.return_distance,
                                             collision_point_category=collision_point_category,
@@ -169,7 +141,7 @@ class SimpleSpeedPlanner:
                     return
 
             zero_speeds_onwards = False
-            target_distance_object = target_distances[target_idx] + ego_distance_from_local_path_start
+            target_distance_object = target_distances[target_idx]
             approaching_speed = min(target_object_speed, 0.0)
 
             for i, wp in enumerate(local_path_msg.waypoints):
