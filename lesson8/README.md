@@ -66,10 +66,34 @@ Your framework from the previous lessons is a simplified one. Remember all limit
 5. Commit and push everything, and be ready to demonstrate your failure cases at the practice session
 
 ##### Failure case 1
-...
+Lane cutting.
+
+Target criterion: `CollisionTest`, with possible `CheckKeepLane` or `InRouteTest` side effects depending on the ego reaction.
+
+In `lesson8/scenarios/failure_case_1.json`, another vehicle cuts into the ego vehicle's lane close to the ego vehicle. A careful human driver would notice the neighboring vehicle's motion, anticipate the merge, and slow down or create space before the vehicle enters the lane.
+
+The framework fails because it has limited behavior prediction for nearby vehicles and mostly reacts after an object becomes a direct collision point on the local path. When the other vehicle cuts in late, the ego vehicle may brake too late, swerve awkwardly, leave the planned route, or collide.
+
+A fix would be to add lane-change and cut-in prediction for nearby vehicles. The planner should estimate whether adjacent vehicles are likely to enter the ego lane and adjust speed before the cut-in becomes an emergency.
 
 ##### Failure case 2
-...
+Late pedestrian crossing.
+
+Target criterion: `CollisionTest`.
+
+In `lesson8/scenarios/failure_case_2.json`, all traffic lights are set to green and all NPC vehicles are removed, leaving the original pedestrians from the demo scenario at their original valid spawn positions. The pedestrian triggers are widened or retimed so pedestrian activity is easier to observe near the ego route.
+
+The framework fails because it reacts mostly to detected collision points on the local path and has very limited detection pedestrians coming from the corner. When pedestrians enter or approach the lane near the ego route, the vehicle may brake too late or collide with one of them.
+
+A fix would be to add pedestrian trajectory prediction and increasing the buffer rate/range of angle of the sensor. The planner should slow down earlier near pedestrians and crossings when a pedestrian could reasonably enter the ego lane.
 
 ##### Failure case 3
-...
+Blind spot jaywalking.
+
+Target criterion: `CollisionTest`.
+
+In `lesson8/scenarios/failure_case_3.json`, a pedestrian enters the ego lane from a blind spot or occluded area when the ego vehicle is already close. A careful human driver would slow down near the occlusion, cover the brake, and leave extra room for a pedestrian who might step into the road.
+
+The framework fails because it only reacts to currently detected objects and has limited reasoning about occlusions or hidden pedestrians. If the pedestrian appears suddenly from the blind spot, the ego vehicle may not have enough distance to brake smoothly and may collide or stop too late.
+
+A fix would be to add occlusion-aware planning and pedestrian risk prediction. The planner should slow down near blind spots, parked vehicles, crossings, and other areas where pedestrians may appear suddenly.

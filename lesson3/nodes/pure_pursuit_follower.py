@@ -46,13 +46,21 @@ class PurePursuitFollower:
             distances = np.insert(distances, 0, 0)
             velocities = np.array([w.speed for w in msg.waypoints])
 
-            distance_to_velocity_interpolator = interp1d(
-                distances,
-                velocities,
-                kind='linear',
-                bounds_error=False,
-                fill_value=0.0
-            )
+            unique_mask = np.concatenate(([True], np.diff(distances) > 1e-6))
+            distances = distances[unique_mask]
+            velocities = velocities[unique_mask]
+
+            if len(distances) < 2:
+                path_linestring = None
+                distance_to_velocity_interpolator = None
+            else:
+                distance_to_velocity_interpolator = interp1d(
+                    distances,
+                    velocities,
+                    kind='linear',
+                    bounds_error=False,
+                    fill_value=0.0
+                )
 
         with self.lock:
             self.path_linestring = path_linestring

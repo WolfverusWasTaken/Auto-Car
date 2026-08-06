@@ -57,16 +57,18 @@ class GlobalPlanner:
     def goal_callback(self, msg):
         with self.lock:
             self.goal_point = BasicPoint2d(msg.pose.position.x, msg.pose.position.y)
+            goal_point = self.goal_point
+            current_location = self.current_location
 
         rospy.loginfo("%s - goal position (%f, %f, %f) in %s frame", rospy.get_name(),
                       msg.pose.position.x, msg.pose.position.y, msg.pose.position.z,
                       msg.header.frame_id)
 
-        if self.current_location is None:
+        if current_location is None:
             return
 
-        start_lanelet = findNearest(self.lanelet2_map.laneletLayer, self.current_location, 1)[0][1]
-        goal_lanelet = findNearest(self.lanelet2_map.laneletLayer, self.goal_point, 1)[0][1]
+        start_lanelet = findNearest(self.lanelet2_map.laneletLayer, current_location, 1)[0][1]
+        goal_lanelet = findNearest(self.lanelet2_map.laneletLayer, goal_point, 1)[0][1]
 
         route = self.graph.getRoute(start_lanelet, goal_lanelet, 0, False)
         if route is None:
@@ -80,23 +82,27 @@ class GlobalPlanner:
 
         laneletseq = path.getRemainingLane(start_lanelet)
 
-        waypoints = self.convert_laneletseq_to_waypoints_list(laneletseq)
+        waypoints = self.convert_laneletseq_to_waypoints_list(laneletseq, goal_point)
         self.publish_lane_from_waypoints_list(waypoints)
 
     def current_pose_callback(self, msg):
         with self.lock:
             self.current_location = BasicPoint2d(msg.pose.position.x, msg.pose.position.y)
+            current_location = self.current_location
+            goal_point = self.goal_point
 
-        if self.goal_point is None:
+        if goal_point is None:
             return
 
-        distance_to_goal = np.hypot(self.current_location.x - self.goal_point.x, self.current_location.y - self.goal_point.y)
+        distance_to_goal = np.hypot(current_location.x - goal_point.x, current_location.y - goal_point.y)
         if distance_to_goal <= self.distance_to_goal_limit:
             self.publish_lane_from_waypoints_list([])
-            self.goal_point = None
+            with self.lock:
+                if self.goal_point is goal_point:
+                    self.goal_point = None
             rospy.loginfo("%s - Goal reached", rospy.get_name())
 
-    def convert_laneletseq_to_waypoints_list(self, laneletseq):
+    def convert_laneletseq_to_waypoints_list(self, laneletseq, goal_point):
         waypoints = []
         previous_point = None
         last_lanelet_start_idx = None
@@ -142,13 +148,15 @@ class GlobalPlanner:
         closest_idx = min(
             snap_candidates,
             key=lambda i: np.hypot(
-                waypoints[i].position.x - self.goal_point.x,
-                waypoints[i].position.y - self.goal_point.y
+                waypoints[i].position.x - goal_point.x,
+                waypoints[i].position.y - goal_point.y
             )
         )
 
         waypoints = waypoints[:closest_idx + 1]
-        self.goal_point = BasicPoint2d(waypoints[-1].position.x, waypoints[-1].position.y)
+        with self.lock:
+            if self.goal_point is goal_point:
+                self.goal_point = BasicPoint2d(waypoints[-1].position.x, waypoints[-1].position.y)
         self.apply_endpoint_speed_ease_out(waypoints)
 
         return waypoints

@@ -1,0 +1,54 @@
+
+ ======= Results of Scenario: vse_play ---- FAILURE =======
+
+ > Ego vehicles:
+Actor(id=1133, type=vehicle.lexus.utlexus); 
+
+ > NPC vehicles:
+
+
+ > Pedestrians:
+Actor(id=1200, type=walker.pedestrian.0002); Actor(id=1201, type=walker.pedestrian.0003); Actor(id=1202, type=walker.pedestrian.0004); Actor(id=1203, type=walker.pedestrian.0005); Actor(id=1204, type=walker.pedestrian.0006); Actor(id=1205, type=walker.pedestrian.0007); Actor(id=1206, type=walker.pedestrian.0008); Actor(id=1207, type=walker.pedestrian.0009); Actor(id=1208, type=walker.pedestrian.0010); Actor(id=1209, type=walker.pedestrian.0011); Actor(id=1210, type=walker.pedestrian.0012); Actor(id=1211, type=walker.pedestrian.0013); Actor(id=1212, type=walker.pedestrian.0014); Actor(id=1213, type=walker.pedestrian.0015); Actor(id=1214, type=walker.pedestrian.0041); 
+
+ > Simulation Information
+╒═══════════════════════╤═════════════════════╕
+│ Start Time            │ 2026-08-06 13:59:13 │
+├───────────────────────┼─────────────────────┤
+│ End Time              │ 2026-08-06 13:59:24 │
+├───────────────────────┼─────────────────────┤
+│ System Time           │ 11.34s              │
+├───────────────────────┼─────────────────────┤
+│ Game Time             │ 0.0s                │
+├───────────────────────┼─────────────────────┤
+│ Ratio (Game / System) │ 0.0                 │
+╘═══════════════════════╧═════════════════════╛
+
+ > Criteria Information
+╒═════════════════════════╤══════════════════════════════╤═════════╤══════════════╤═══════════════╕
+│ Actor                   │ Criterion                    │ Result  │ Actual Value │ Success Value │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ CollisionTest (Req.)         │ FAILURE │ 1            │ 0             │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ CheckKeepLane (Req.)         │ SUCCESS │ 0            │ 0             │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ OffRoadTest (Req.)           │ SUCCESS │ 0            │ 0             │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ OnSidewalkTest (Req.)        │ SUCCESS │ 0            │ 0             │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ RunningRedLightTest (Req.)   │ SUCCESS │ 0            │ 0             │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ RunningStopTest (Req.)       │ SUCCESS │ 0            │ 0             │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ OutsideRouteLanesTest (Req.) │ SUCCESS │ 0            │ 0             │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ WrongLaneTest (Req.)         │ SUCCESS │ 0            │ 0             │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ InRouteTest (Req.)           │ SUCCESS │ 0            │ 0             │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=1133) │ RouteCompletionTest (Req.)   │ FAILURE │ 1.11         │ 100           │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│                         │ Timeout (Req.)               │ SUCCESS │ 0.0          │ 18000.0       │
+├─────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│                         │ GLOBAL RESULT                │ FAILURE │              │               │
+╘═════════════════════════╧══════════════════════════════╧═════════╧══════════════╧═══════════════╛
+ ==========================================================

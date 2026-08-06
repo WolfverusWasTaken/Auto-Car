@@ -1,0 +1,54 @@
+
+ ======= Results of Scenario: vse_play ---- FAILURE =======
+
+ > Ego vehicles:
+Actor(id=505, type=vehicle.lexus.utlexus); 
+
+ > NPC vehicles:
+Actor(id=529, type=vehicle.ford.mustang); Actor(id=530, type=vehicle.audi.tt); Actor(id=531, type=vehicle.vespa.zx125); Actor(id=532, type=vehicle.mitsubishi.fusorosa); Actor(id=533, type=vehicle.yamaha.yzf); Actor(id=534, type=vehicle.kawasaki.ninja); Actor(id=535, type=vehicle.mercedes.coupe); Actor(id=536, type=vehicle.volkswagen.t2_2021); Actor(id=537, type=vehicle.harley-davidson.low_rider); Actor(id=538, type=vehicle.mitsubishi.fusorosa); Actor(id=539, type=vehicle.tesla.cybertruck); Actor(id=540, type=vehicle.audi.a2); 
+
+ > Pedestrians:
+
+
+ > Simulation Information
+╒═══════════════════════╤═════════════════════╕
+│ Start Time            │ 2026-08-06 14:11:03 │
+├───────────────────────┼─────────────────────┤
+│ End Time              │ 2026-08-06 14:11:25 │
+├───────────────────────┼─────────────────────┤
+│ System Time           │ 22.0s               │
+├───────────────────────┼─────────────────────┤
+│ Game Time             │ 21.82s              │
+├───────────────────────┼─────────────────────┤
+│ Ratio (Game / System) │ 0.992               │
+╘═══════════════════════╧═════════════════════╛
+
+ > Criteria Information
+╒════════════════════════╤══════════════════════════════╤═════════╤══════════════╤═══════════════╕
+│ Actor                  │ Criterion                    │ Result  │ Actual Value │ Success Value │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ CollisionTest (Req.)         │ FAILURE │ 1            │ 0             │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ CheckKeepLane (Req.)         │ SUCCESS │ 0            │ 0             │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ OffRoadTest (Req.)           │ SUCCESS │ 0            │ 0             │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ OnSidewalkTest (Req.)        │ SUCCESS │ 0            │ 0             │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ RunningRedLightTest (Req.)   │ SUCCESS │ 0            │ 0             │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ RunningStopTest (Req.)       │ SUCCESS │ 0            │ 0             │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ OutsideRouteLanesTest (Req.) │ SUCCESS │ 0            │ 0             │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ WrongLaneTest (Req.)         │ SUCCESS │ 0            │ 0             │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ InRouteTest (Req.)           │ SUCCESS │ 0            │ 0             │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│ lexus.utlexus (id=505) │ RouteCompletionTest (Req.)   │ FAILURE │ 1.44         │ 100           │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│                        │ Timeout (Req.)               │ SUCCESS │ 21.82        │ 18000.0       │
+├────────────────────────┼──────────────────────────────┼─────────┼──────────────┼───────────────┤
+│                        │ GLOBAL RESULT                │ FAILURE │              │               │
+╘════════════════════════╧══════════════════════════════╧═════════╧══════════════╧═══════════════╛
+ ==========================================================

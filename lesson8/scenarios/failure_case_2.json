@@ -1,0 +1,2071 @@
+{
+  "vehicles": [
+    {
+      "id": 871,
+      "type": "walker.pedestrian.0002",
+      "location": {
+        "x": 1.3005754947662354,
+        "y": 110.38825988769531,
+        "z": 35.12261962890625
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 55.01962661743164,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 4.615664005279541,
+            "y": 115.05113983154297,
+            "z": 34.1542854309082
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": 19.99004554748535,
+            "y": 110.69937133789062,
+            "z": 34.133277893066406
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 3,
+          "location": {
+            "x": 22.630884911379585,
+            "y": 118.92299546902262,
+            "z": 36.0132942199707
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 4,
+          "location": {
+            "x": 25.770111325681427,
+            "y": 119.55720842302074,
+            "z": 34.02203369140625
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 5,
+          "location": {
+            "x": 28.97267026516246,
+            "y": 116.66664580856404,
+            "z": 34.01545333862305
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": 34.83657588447113,
+            "y": 108.37230567509535,
+            "z": 33.913856506347656
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": -2.4,
+          "y": 59.3,
+          "z": 34.25
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 872,
+      "type": "walker.pedestrian.0003",
+      "location": {
+        "x": 21.595863342285156,
+        "y": 117.09658813476562,
+        "z": 35.057701110839844
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -111.06474304199219,
+        "roll": 0.0
+      },
+      "speed_km_h": 6.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 19.69685173034668,
+            "y": 112.16615295410156,
+            "z": 34.13520050048828
+          },
+          "yaw": null,
+          "speed_km_h": 6.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": 4.475381851196289,
+            "y": 114.89862823486328,
+            "z": 34.15488052368164
+          },
+          "yaw": null,
+          "speed_km_h": 6.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": 0.08558166027069092,
+            "y": 106.16513061523438,
+            "z": 34.19135665893555
+          },
+          "yaw": null,
+          "speed_km_h": 6.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 6.0,
+      "trigger": {
+        "center": {
+          "x": -2.3,
+          "y": 65.7,
+          "z": 35.06
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 873,
+      "type": "walker.pedestrian.0004",
+      "location": {
+        "x": 6.034723281860352,
+        "y": 125.82691955566406,
+        "z": 35.068260192871094
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -94.60061645507812,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 5.406065940856934,
+            "y": 118.01449584960938,
+            "z": 34.139625549316406
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": 19.49761390686035,
+            "y": 109.63279724121094,
+            "z": 34.14206314086914
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": 17.297452926635742,
+            "y": 102.27801513671875,
+            "z": 34.17337417602539
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": -0.7,
+          "y": 83.9,
+          "z": 35.07
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 874,
+      "type": "walker.pedestrian.0005",
+      "location": {
+        "x": 189.62815856933594,
+        "y": 534.4376831054688,
+        "z": 35.9037971496582
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -7.304183483123779,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 200.3488311767578,
+            "y": 533.0635375976562,
+            "z": 34.63211441040039
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": 210.7542724609375,
+            "y": 527.5122680664062,
+            "z": 34.487117767333984
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 3,
+          "location": {
+            "x": 217.8183135986328,
+            "y": 524.6332397460938,
+            "z": 34.17653274536133
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": 225.48163690146382,
+            "y": 521.528470943563,
+            "z": 33.83987808227539
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": 174.26714834529938,
+          "y": 483.07702448035457,
+          "z": 34.975311279296875
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 875,
+      "type": "walker.pedestrian.0006",
+      "location": {
+        "x": 217.03860473632812,
+        "y": 524.476806640625,
+        "z": 35.14628219604492
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 147.37440490722656,
+        "roll": 0.0
+      },
+      "speed_km_h": 6.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 201.40855407714844,
+            "y": 534.4824829101562,
+            "z": 34.62358474731445
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": 207.33314514160156,
+            "y": 543.766845703125,
+            "z": 34.628501892089844
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 3,
+          "location": {
+            "x": 215.85256752785358,
+            "y": 555.4937053765155,
+            "z": 34.74113082885742
+          },
+          "yaw": null,
+          "speed_km_h": 6.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": 223.92340038743382,
+            "y": 567.5505437321789,
+            "z": 34.8468017578125
+          },
+          "yaw": null,
+          "speed_km_h": 6.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 6.0,
+      "trigger": {
+        "center": {
+          "x": 174.26332284794333,
+          "y": 483.03821439052143,
+          "z": 34.78460693359375
+        },
+        "radius": 8.5
+      }
+    },
+    {
+      "id": 876,
+      "type": "walker.pedestrian.0007",
+      "location": {
+        "x": 121.18360900878906,
+        "y": 806.244140625,
+        "z": 36.05849838256836
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -43.90349197387695,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 139.58543395996094,
+            "y": 788.5335083007812,
+            "z": 35.040000915527344
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": 144.5275115966797,
+            "y": 782.4607543945312,
+            "z": 35.113948822021484
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": 165.08192443847656,
+          "y": 799.3276977539062,
+          "z": 35.0771484375
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 877,
+      "type": "walker.pedestrian.0008",
+      "location": {
+        "x": 136.440185546875,
+        "y": 786.865234375,
+        "z": 35.99149703979492
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 133.64743041992188,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 119.48721313476562,
+            "y": 804.6381225585938,
+            "z": 35.11616897583008
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": 126.01656341552734,
+            "y": 812.671630859375,
+            "z": 35.120174407958984
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": 165.08583068847656,
+          "y": 799.3276977539062,
+          "z": 35.077186584472656
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 878,
+      "type": "walker.pedestrian.0009",
+      "location": {
+        "x": 117.13321685791016,
+        "y": 802.814208984375,
+        "z": 35.730796813964844
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -41.40581130981445,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 136.15533447265625,
+            "y": 786.04052734375,
+            "z": 36.967098236083984
+          },
+          "yaw": null,
+          "speed_km_h": 6.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": 149.44383239746094,
+            "y": 794.1726684570312,
+            "z": 35.14573287963867
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": 165.08192443847656,
+          "y": 799.3276977539062,
+          "z": 35.0771484375
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 879,
+      "type": "walker.pedestrian.0010",
+      "location": {
+        "x": -36.6060791015625,
+        "y": -107.18925476074219,
+        "z": 35.77660369873047
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 154.7344970703125,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": -51.621604919433594,
+            "y": -99.51107025146484,
+            "z": 35.49508285522461
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": -58.63779830932617,
+            "y": -106.98346710205078,
+            "z": 35.604103088378906
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 3,
+          "location": {
+            "x": -66.24722290039062,
+            "y": -110.4518051147461,
+            "z": 35.59164810180664
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": -76.2153091430664,
+            "y": -94.71165466308594,
+            "z": 35.7193603515625
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": -145.66663967980932,
+          "y": 32.58456676120106,
+          "z": 37.451072692871094
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 880,
+      "type": "walker.pedestrian.0011",
+      "location": {
+        "x": -73.30115509033203,
+        "y": -98.11538696289062,
+        "z": 36.24630355834961
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -56.84543991088867,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": -65.1270980834961,
+            "y": -110.23385620117188,
+            "z": 35.5560188293457
+          },
+          "yaw": null,
+          "speed_km_h": 6.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": -58.611473083496094,
+            "y": -105.96569061279297,
+            "z": 35.58503723144531
+          },
+          "yaw": null,
+          "speed_km_h": 6.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 3,
+          "location": {
+            "x": -51.132747650146484,
+            "y": -99.48242950439453,
+            "z": 35.43205642700195
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": -42.520751953125,
+            "y": -104.5514144897461,
+            "z": 35.23567581176758
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": -145.66664123535156,
+          "y": 32.584564208984375,
+          "z": 37.451072692871094
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 881,
+      "type": "walker.pedestrian.0012",
+      "location": {
+        "x": 32.10724639892578,
+        "y": -114.5687255859375,
+        "z": 36.07442855834961
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 104.87562561035156,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 27.02645492553711,
+            "y": -95.17671966552734,
+            "z": 35.119407653808594
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": 13.989595413208008,
+            "y": -94.05498504638672,
+            "z": 35.25944137573242
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 3,
+          "location": {
+            "x": 6.912400245666504,
+            "y": -91.5257339477539,
+            "z": 35.244258880615234
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": -3.6725730895996094,
+            "y": -92.60344696044922,
+            "z": 35.099998474121094
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": -38.822477188407866,
+          "y": -112.3552305036802,
+          "z": 35.145076751708984
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 882,
+      "type": "walker.pedestrian.0013",
+      "location": {
+        "x": -38.586036682128906,
+        "y": -133.732177734375,
+        "z": 36.01962661743164
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 105.89930725097656,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": -31.9863338470459,
+            "y": -122.41299438476562,
+            "z": 35.123260498046875
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": -27.73612403869629,
+            "y": -108.85027313232422,
+            "z": 35.09999084472656
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": -32.60930252075195,
+            "y": -102.60560607910156,
+            "z": 35.100006103515625
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": -52.476224091389845,
+          "y": -103.96463598318942,
+          "z": 35.44191360473633
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 883,
+      "type": "walker.pedestrian.0014",
+      "location": {
+        "x": -29.156574249267578,
+        "y": -108.90845489501953,
+        "z": 35.7714958190918
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -107.2233657836914,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": -33.02798843383789,
+            "y": -121.39701080322266,
+            "z": 35.110679626464844
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": -36.199092864990234,
+            "y": -127.33039855957031,
+            "z": 35.2422981262207
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 3,
+          "location": {
+            "x": -39.51044845581055,
+            "y": -133.4709930419922,
+            "z": 35.34605026245117
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": -45.34453201293945,
+            "y": -132.8837432861328,
+            "z": 35.36476516723633
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": -50.91086831089264,
+          "y": -105.13617229076667,
+          "z": 35.40834045410156
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 884,
+      "type": "walker.pedestrian.0015",
+      "location": {
+        "x": 6.653878211975098,
+        "y": -89.321533203125,
+        "z": 36.116249084472656
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -23.201335906982422,
+        "roll": 0.0
+      },
+      "speed_km_h": 5.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": 14.2014741897583,
+            "y": -92.5569839477539,
+            "z": 35.25493240356445
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": 29.581993103027344,
+            "y": -92.22942352294922,
+            "z": 35.10009765625
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": 28.89641761779785,
+            "y": -84.45637512207031,
+            "z": 35.10539245605469
+          },
+          "yaw": null,
+          "speed_km_h": 5.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 5.0,
+      "trigger": {
+        "center": {
+          "x": -19.795515060424805,
+          "y": -116.1821517944336,
+          "z": 35.10798645019531
+        },
+        "radius": 8.0
+      }
+    },
+    {
+      "id": 885,
+      "type": "walker.pedestrian.0041",
+      "location": {
+        "x": -5.935770034790039,
+        "y": 63.6074104309082,
+        "z": 35.28023910522461
+      },
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -95.72452545166016,
+        "roll": 0.0
+      },
+      "speed_km_h": 7.0,
+      "idle_time_s": 0.0,
+      "waypoints": [
+        {
+          "index": 1,
+          "location": {
+            "x": -6.817155852716332,
+            "y": 54.81515123661726,
+            "z": 34.42660140991211
+          },
+          "yaw": null,
+          "speed_km_h": 7.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": 2,
+          "location": {
+            "x": -6.818322708644907,
+            "y": 50.076111840863604,
+            "z": 34.35658645629883
+          },
+          "yaw": null,
+          "speed_km_h": 7.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": false
+        },
+        {
+          "index": "destination",
+          "location": {
+            "x": -6.882874877682204,
+            "y": 38.51524004473977,
+            "z": 34.80215072631836
+          },
+          "yaw": null,
+          "speed_km_h": 7.0,
+          "speed_deviation_km_h": 0,
+          "idle_time_s": 0.0,
+          "auto_generated": false,
+          "is_destination": true
+        }
+      ],
+      "ignore_traffic_lights": false,
+      "ignore_stop_signs": false,
+      "ignore_vehicles": false,
+      "destination_speed_km_h": 7.0,
+      "trigger": {
+        "center": {
+          "x": -23.6,
+          "y": 50.8,
+          "z": 36.46
+        },
+        "radius": 12.0
+      }
+    }
+  ],
+  "timestamp": 1786012091.902552,
+  "map_name": "tartu_demo",
+  "ego_vehicle": {
+    "type": "vehicle.lexus.utlexus",
+    "location": {
+      "x": -27.27976417541504,
+      "y": 50.947967529296875,
+      "z": 36.01516342163086
+    },
+    "rotation": {
+      "pitch": 0.0,
+      "yaw": -1.8782581090927124,
+      "roll": 0.0
+    },
+    "role": "ego_vehicle",
+    "ignore_traffic_lights": false,
+    "ignore_stop_signs": false,
+    "ignore_vehicles": true,
+    "max_lat_acc": 3.0,
+    "waypoints": [
+      {
+        "index": "destination",
+        "location": {
+          "x": -23.43064308166504,
+          "y": -113.74683380126953,
+          "z": 39.41937255859375
+        },
+        "yaw": 4.546377182006836,
+        "speed_km_h": 40.0,
+        "speed_deviation_km_h": 0,
+        "idle_time_s": 0.0,
+        "auto_generated": false,
+        "is_destination": true
+      }
+    ],
+    "destination_speed_km_h": 40.0
+  },
+  "traffic_light_triggers": [
+    {
+      "center": {
+        "x": 26.121476232368945,
+        "y": 158.96139061942466,
+        "z": 33.89999771118164
+      },
+      "radius": 6.0,
+      "fingerprint": [
+        [
+          220,
+          962,
+          147
+        ]
+      ]
+    },
+    {
+      "center": {
+        "x": 26.147434466928114,
+        "y": 158.96942697537327,
+        "z": 33.89999771118164
+      },
+      "radius": 6.0,
+      "fingerprint": [
+        [
+          254,
+          951,
+          147
+        ],
+        [
+          273,
+          1047,
+          162
+        ]
+      ]
+    },
+    {
+      "center": {
+        "x": 73.11780177324901,
+        "y": 275.4107446318069,
+        "z": 33.90166091918945
+      },
+      "radius": 6.0,
+      "fingerprint": [
+        [
+          441,
+          1449,
+          164
+        ],
+        [
+          456,
+          1443,
+          150
+        ]
+      ]
+    },
+    {
+      "center": {
+        "x": 107.25493591427802,
+        "y": 359.892425755751,
+        "z": 34.51591873168945
+      },
+      "radius": 6.0,
+      "fingerprint": [
+        [
+          547,
+          1695,
+          162
+        ],
+        [
+          566,
+          1685,
+          149
+        ]
+      ]
+    },
+    {
+      "center": {
+        "x": 73.11303756819181,
+        "y": 275.39730925670716,
+        "z": 33.90138626098633
+      },
+      "radius": 6.0,
+      "ids_live": [
+        102
+      ],
+      "ids_reference": [
+        22
+      ],
+      "fingerprint": [
+        [
+          412,
+          1440,
+          149
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": 107.26348739862442,
+        "y": 359.8924259950832,
+        "z": 34.51640701293945
+      },
+      "radius": 6.0,
+      "fingerprint": [
+        [
+          525,
+          1707,
+          149
+        ]
+      ]
+    },
+    {
+      "center": {
+        "x": 211.01547214386525,
+        "y": 761.7826538930718,
+        "z": 36.7233772277832
+      },
+      "radius": 6.0,
+      "ids_live": [
+        122,
+        132
+      ],
+      "ids_reference": [
+        42,
+        52
+      ],
+      "fingerprint": [
+        [
+          625,
+          3195,
+          150
+        ],
+        [
+          628,
+          3226,
+          150
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": 211.01937872772092,
+        "y": 761.7767948380219,
+        "z": 36.723358154296875
+      },
+      "radius": 6.0,
+      "ids_live": [
+        124,
+        125
+      ],
+      "ids_reference": [
+        44,
+        45
+      ],
+      "fingerprint": [
+        [
+          534,
+          3189,
+          150
+        ],
+        [
+          562,
+          3166,
+          150
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": 130.4503819971927,
+        "y": 785.8473367907245,
+        "z": 34.939998626708984
+      },
+      "radius": 6.0,
+      "ids_live": [
+        175,
+        176,
+        177,
+        182
+      ],
+      "ids_reference": [
+        95,
+        96,
+        97,
+        102
+      ],
+      "fingerprint": [
+        [
+          276,
+          2907,
+          155
+        ],
+        [
+          354,
+          2997,
+          153
+        ],
+        [
+          371,
+          2982,
+          166
+        ],
+        [
+          387,
+          2967,
+          153
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": 4.933588437693587,
+        "y": 646.2338314817429,
+        "z": 35.67298889160156
+      },
+      "radius": 6.0,
+      "fingerprint": [
+        [
+          -330,
+          2075,
+          152
+        ],
+        [
+          -309,
+          2067,
+          164
+        ],
+        [
+          -258,
+          2141,
+          152
+        ]
+      ]
+    },
+    {
+      "center": {
+        "x": -156.5548095708558,
+        "y": 216.47637811934464,
+        "z": 34.47370910644531
+      },
+      "radius": 6.0,
+      "ids_live": [
+        226,
+        227
+      ],
+      "ids_reference": [
+        150,
+        151
+      ],
+      "fingerprint": [
+        [
+          -699,
+          475,
+          165
+        ],
+        [
+          -679,
+          489,
+          150
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": -174.1999555827906,
+        "y": 119.27569501320059,
+        "z": 34.66001892089844
+      },
+      "radius": 6.0,
+      "fingerprint": [
+        [
+          -642,
+          278,
+          156
+        ]
+      ]
+    },
+    {
+      "center": {
+        "x": -174.19937133789062,
+        "y": 119.27295684814453,
+        "z": 34.66001892089844
+      },
+      "radius": 2.0,
+      "fingerprint": [
+        [
+          -674,
+          269,
+          167
+        ],
+        [
+          -673,
+          207,
+          155
+        ]
+      ]
+    },
+    {
+      "center": {
+        "x": 5.214141305283672,
+        "y": 645.984461486196,
+        "z": 35.67294692993164
+      },
+      "radius": 6.4,
+      "fingerprint": [
+        [
+          -330,
+          2074,
+          152
+        ],
+        [
+          -309,
+          2066,
+          164
+        ],
+        [
+          -258,
+          2140,
+          152
+        ]
+      ]
+    },
+    {
+      "center": {
+        "x": 29.99553686595641,
+        "y": 167.9546620415721,
+        "z": 33.902069091796875
+      },
+      "radius": 6.0,
+      "ids_live": [
+        88
+      ],
+      "ids_reference": [
+        65
+      ],
+      "fingerprint": [
+        [
+          218,
+          963,
+          146
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": 29.992095102367017,
+        "y": 168.1132881041124,
+        "z": 33.90283203125
+      },
+      "radius": 6.0,
+      "ids_live": [
+        89,
+        90
+      ],
+      "ids_reference": [
+        66,
+        67
+      ],
+      "fingerprint": [
+        [
+          251,
+          950,
+          146
+        ],
+        [
+          273,
+          1047,
+          162
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": 73.13113945540258,
+        "y": 275.2433562064003,
+        "z": 33.901329040527344
+      },
+      "radius": 6.0,
+      "ids_live": [
+        103,
+        104
+      ],
+      "ids_reference": [
+        80,
+        81
+      ],
+      "fingerprint": [
+        [
+          441,
+          1449,
+          163
+        ],
+        [
+          456,
+          1443,
+          149
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": 110.30142807163159,
+        "y": 368.4684765412213,
+        "z": 34.60230255126953
+      },
+      "radius": 6.0,
+      "ids_live": [
+        114
+      ],
+      "ids_reference": [
+        91
+      ],
+      "fingerprint": [
+        [
+          525,
+          1707,
+          148
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": 106.30124570089413,
+        "y": 357.5496368712119,
+        "z": 34.491737365722656
+      },
+      "radius": 6.0,
+      "ids_live": [
+        115,
+        116
+      ],
+      "ids_reference": [
+        92,
+        93
+      ],
+      "fingerprint": [
+        [
+          547,
+          1695,
+          161
+        ],
+        [
+          566,
+          1685,
+          148
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": -6.243839244101114,
+        "y": 631.9362689504571,
+        "z": 35.55111312866211
+      },
+      "radius": 6.0,
+      "ids_live": [
+        188,
+        189
+      ],
+      "ids_reference": [
+        165,
+        166
+      ],
+      "fingerprint": [
+        [
+          -330,
+          2075,
+          156
+        ],
+        [
+          -258,
+          2141,
+          152
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": -6.47295220302955,
+        "y": 631.7669895458598,
+        "z": 35.549530029296875
+      },
+      "radius": 6.0,
+      "ids_live": [
+        190,
+        191
+      ],
+      "ids_reference": [
+        167,
+        168
+      ],
+      "fingerprint": [
+        [
+          -330,
+          2074,
+          151
+        ],
+        [
+          -258,
+          2140,
+          157
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": -95.25025536525278,
+        "y": 447.15914083994625,
+        "z": 34.716033935546875
+      },
+      "radius": 6.0,
+      "ids_live": [
+        74,
+        76
+      ],
+      "ids_reference": [
+        51,
+        53
+      ],
+      "fingerprint": [
+        [
+          -495,
+          1505,
+          155
+        ],
+        [
+          -434,
+          1563,
+          150
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": -94.86173304260679,
+        "y": 446.85916180917764,
+        "z": 34.71704864501953
+      },
+      "radius": 6.0,
+      "ids_live": [
+        78,
+        80
+      ],
+      "ids_reference": [
+        55,
+        57
+      ],
+      "fingerprint": [
+        [
+          -495,
+          1504,
+          155
+        ],
+        [
+          -444,
+          1528,
+          151
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": -173.40250319814086,
+        "y": 138.0678365431153,
+        "z": 34.689903259277344
+      },
+      "radius": 6.0,
+      "ids_live": [
+        209,
+        212,
+        225
+      ],
+      "ids_reference": [
+        186,
+        189,
+        202
+      ],
+      "fingerprint": [
+        [
+          -674,
+          269,
+          167
+        ],
+        [
+          -673,
+          207,
+          155
+        ],
+        [
+          -642,
+          278,
+          156
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": -156.19030616066487,
+        "y": 216.6368538830164,
+        "z": 34.47503662109375
+      },
+      "radius": 6.0,
+      "ids_live": [
+        192,
+        231
+      ],
+      "ids_reference": [
+        449,
+        488
+      ],
+      "fingerprint": [
+        [
+          -716,
+          492,
+          151
+        ],
+        [
+          -701,
+          475,
+          165
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    },
+    {
+      "center": {
+        "x": -95.14378224805816,
+        "y": 446.5057908761767,
+        "z": 34.71937561035156
+      },
+      "radius": 6.0,
+      "ids_live": [
+        75,
+        77,
+        79
+      ],
+      "ids_reference": [
+        332,
+        334,
+        336
+      ],
+      "fingerprint": [
+        [
+          -504,
+          1507,
+          150
+        ],
+        [
+          -502,
+          1542,
+          155
+        ],
+        [
+          -445,
+          1528,
+          151
+        ]
+      ],
+      "sequence": [
+        {
+          "color": "Green",
+          "duration_s": 30000.0,
+          "duration_ticks": 600000
+        }
+      ]
+    }
+  ],
+  "weather_keyframes": [
+    {
+      "route_percentage": 0.0,
+      "cloudiness": 30.0,
+      "precipitation": 0.0,
+      "precipitation_deposits": 0.0,
+      "wind_intensity": 30.0,
+      "sun_azimuth_angle": 360.0,
+      "sun_altitude_angle": 60.0,
+      "fog_density": 0.0,
+      "fog_distance": 0.0,
+      "fog_falloff": 0.20000000298023224,
+      "wetness": 0.0,
+      "scattering_intensity": 0.0,
+      "mie_scattering_scale": 0.0,
+      "rayleigh_scattering_scale": 0.03310000151395798,
+      "dust_storm": 0.0
+    },
+    {
+      "route_percentage": 25.000000000000007,
+      "cloudiness": 100.0,
+      "precipitation": 100.0,
+      "precipitation_deposits": 100.0,
+      "wind_intensity": 100.0,
+      "sun_azimuth_angle": 271.01123046875,
+      "sun_altitude_angle": 20.561798095703125,
+      "fog_density": 50.0,
+      "fog_distance": 92.6966323852539,
+      "fog_falloff": 0.25280898809432983,
+      "wetness": 100.0,
+      "scattering_intensity": 100.0,
+      "mie_scattering_scale": 1.0,
+      "rayleigh_scattering_scale": 1.0,
+      "dust_storm": 100.0
+    },
+    {
+      "route_percentage": 49.99999999999993,
+      "cloudiness": 30.0,
+      "precipitation": 0.0,
+      "precipitation_deposits": 0.0,
+      "wind_intensity": 30.0,
+      "sun_azimuth_angle": 180.0,
+      "sun_altitude_angle": -20.898876190185547,
+      "fog_density": 0.0,
+      "fog_distance": 0.0,
+      "fog_falloff": 0.20000000298023224,
+      "wetness": 0.0,
+      "scattering_intensity": 0.0,
+      "mie_scattering_scale": 0.0,
+      "rayleigh_scattering_scale": 0.03310000151395798,
+      "dust_storm": 0.0
+    },
+    {
+      "route_percentage": 75.0,
+      "cloudiness": 30.0,
+      "precipitation": 0.0,
+      "precipitation_deposits": 0.0,
+      "wind_intensity": 30.0,
+      "sun_azimuth_angle": 88.98876190185547,
+      "sun_altitude_angle": 20.561798095703125,
+      "fog_density": 0.0,
+      "fog_distance": 0.0,
+      "fog_falloff": 0.20000000298023224,
+      "wetness": 0.0,
+      "scattering_intensity": 0.0,
+      "mie_scattering_scale": 0.0,
+      "rayleigh_scattering_scale": 0.03310000151395798,
+      "dust_storm": 0.0
+    },
+    {
+      "route_percentage": 100.0,
+      "cloudiness": 0.0,
+      "precipitation": 0.0,
+      "precipitation_deposits": 0.0,
+      "wind_intensity": 0.0,
+      "sun_azimuth_angle": 0.0,
+      "sun_altitude_angle": 60.674156188964844,
+      "fog_density": 0.0,
+      "fog_distance": 0.0,
+      "fog_falloff": 0.20000000298023224,
+      "wetness": 0.0,
+      "scattering_intensity": 0.0,
+      "mie_scattering_scale": 0.0,
+      "rayleigh_scattering_scale": 0.03310000151395798,
+      "dust_storm": 0.0
+    }
+  ]
+}
